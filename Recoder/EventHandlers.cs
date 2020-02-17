@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Recoder
+namespace Recorder
 {
     /// <summary>
     /// 输出视频帧的事件参数

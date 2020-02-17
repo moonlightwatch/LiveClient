@@ -80,9 +80,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Recoder\Recoder.csproj">
+    <ProjectReference Include="..\Recoder\Recorder.csproj">
       <Project>{7c0af252-8b11-4b9e-a1e3-b0c928749a3e}</Project>
-      <Name>Recoder</Name>
+      <Name>Recorder</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

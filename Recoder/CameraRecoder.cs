@@ -7,12 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Recoder
+namespace Recorder
 {
     /// <summary>
     /// 摄像头录制工具类
     /// </summary>
-    public class CameraRecoder
+    public class CameraRecorder
     {
         // 视频设备实例
         private VideoCaptureDevice videoCaptureDevice = null;
@@ -57,7 +57,7 @@ namespace Recoder
         /// <summary>
         /// 创建 CameraRecoder 实例
         /// </summary>
-        public CameraRecoder()
+        public CameraRecorder()
         {
 
         }
@@ -65,24 +65,24 @@ namespace Recoder
         /// <summary>
         /// 使用默认设备启动录制
         /// </summary>
-        public void StartRecoder()
+        public void StartRecorder()
         {
             // 获取视频输入设备列表
-            var devices = CameraRecoder.VideoDevices();
+            var devices = CameraRecorder.VideoDevices();
             // 检查设备存在性
             if (devices.Count == 0)
             {
                 throw new Exception("未发现视频输入设备");
             }
             // 调用指定设备启动录制
-            this.StartRecoder(devices[0].MonikerString);
+            this.StartRecorder(devices[0].MonikerString);
         }
 
         /// <summary>
         /// 使用指定设备启动录制，monikerString 来自静态方法 VideoDevices 
         /// </summary>
         /// <param name="monikerString">monikerString</param>
-        public void StartRecoder(string monikerString)
+        public void StartRecorder(string monikerString)
         {
             // 若 videoCaptureDevice 已存在
             if (videoCaptureDevice != null)
@@ -114,7 +114,7 @@ namespace Recoder
         /// <summary>
         /// 停止录制，并卸载资源
         /// </summary>
-        public void StopRecoder()
+        public void StopRecorder()
         {
             // 若 videoCaptureDevice 未初始化，则不进行动作
             if (videoCaptureDevice == null)
@@ -123,6 +123,7 @@ namespace Recoder
             }
             // 移除事件处理
             videoCaptureDevice.NewFrame -= VideoCaptureDevice_NewFrame;
+            videoCaptureDevice.VideoSourceError -= VideoCaptureDevice_VideoSourceError;
             // 停止录制
             videoCaptureDevice.Stop();
             // 初始化 videoCaptureDevice 
@@ -145,7 +146,7 @@ namespace Recoder
             {
                 return;
             }
-
+            lastFrameTicks = nowTicks;
             // 调整尺寸后的视频帧
             var frame = this.resizeBitmap(eventArgs.Frame, this.FrameSize);
             // 触发输出视频帧事件
@@ -159,7 +160,7 @@ namespace Recoder
         /// <param name="eventArgs"></param>
         private void VideoCaptureDevice_VideoSourceError(object sender, Accord.Video.VideoSourceErrorEventArgs eventArgs)
         {
-            this.StopRecoder();
+            this.StopRecorder();
             throw new Exception("已停止录制。VideoSourceError: \n" + eventArgs.Description, eventArgs.Exception);
         }
 
