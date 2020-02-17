@@ -9,6 +9,9 @@ using System.Windows.Forms;
 
 namespace Recorder
 {
+    /// <summary>
+    /// 录制屏幕的工具类
+    /// </summary>
     public class ScreenRecorder
     {
         /// <summary>

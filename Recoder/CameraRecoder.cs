@@ -95,7 +95,7 @@ namespace Recorder
                 // 和当前实例不同，则使其停止
                 else
                 {
-                    videoCaptureDevice.SignalToStop();
+                    videoCaptureDevice.Stop();
                 }
             }
             // 创建新的 videoCaptureDevice 实例
