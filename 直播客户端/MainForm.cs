@@ -12,9 +12,15 @@ namespace 直播客户端
 {
     public partial class MainForm : Form
     {
+        private Recoder.CameraRecoder cameraRecoder = new Recoder.CameraRecoder();
+
         public MainForm()
         {
             InitializeComponent();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
         }
     }
 }
