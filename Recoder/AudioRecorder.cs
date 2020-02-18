@@ -1,4 +1,5 @@
-﻿using Accord.DirectSound;
+﻿using Accord.Audio;
+using Accord.DirectSound;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,11 +19,16 @@ namespace Recorder
         private AudioCaptureDevice audioCaptureDevice = null;
 
         /// <summary>
+        /// 输出音频帧事件
+        /// </summary>
+        public event EventHandler<NewFrameEventArgs> OnOutputFrame = (object sender, NewFrameEventArgs e) => { };
+
+        /// <summary>
         /// 创建录制声音的实例
         /// </summary>
         public AudioRecorder()
         {
-            
+
         }
 
         /// <summary>
@@ -31,7 +37,7 @@ namespace Recorder
         public void StartRecorder()
         {
             // 获取视频输入设备列表
-            var devices = AudioRecorder.AudioDevices() ;
+            var devices = AudioRecorder.AudioDevices();
             // 检查设备存在性
             if (devices.Count == 0)
             {
@@ -65,7 +71,7 @@ namespace Recorder
             audioCaptureDevice = new AudioCaptureDevice(device);
 
             // 添加 产生音频帧 事件的处理
-            audioCaptureDevice.NewFrame += this.AudioCaptureDevice_NewFrame; 
+            audioCaptureDevice.NewFrame += this.AudioCaptureDevice_NewFrame;
 
             // 添加 音频源错误 事件的处理
             audioCaptureDevice.AudioSourceError += this.AudioCaptureDevice_AudioSourceError;
@@ -91,8 +97,6 @@ namespace Recorder
             audioCaptureDevice.Stop();
             // 初始化 videoCaptureDevice 
             audioCaptureDevice = null;
-            var a = new Accord.Audio.SampleConverter();
-            Accord.Audio.Windows
         }
 
         /// <summary>
@@ -102,12 +106,13 @@ namespace Recorder
         /// <param name="e"></param>
         private void AudioCaptureDevice_NewFrame(object sender, Accord.Audio.NewFrameEventArgs e)
         {
-            
+            OnOutputFrame(this, e);
         }
 
         private void AudioCaptureDevice_AudioSourceError(object sender, Accord.Audio.AudioSourceErrorEventArgs e)
         {
-            throw new NotImplementedException();
+            this.StopRecorder();
+            throw new Exception("已停止录制。VideoSourceError: \n" + e.Description);
         }
 
 
