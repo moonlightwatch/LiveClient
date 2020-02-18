@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace 直播客户端
     {
         private Recorder.CameraRecorder cameraRecoder = new Recorder.CameraRecorder();
         private Recorder.ScreenRecorder screenRecorder = new Recorder.ScreenRecorder();
+        private Recorder.AudioRecorder audioRecorder = new Recorder.AudioRecorder();
 
         public MainForm()
         {
@@ -113,6 +115,16 @@ namespace 直播客户端
         private void numericUpDown_screenheight_ValueChanged(object sender, EventArgs e)
         {
             screenRecorder.FrameSize = new Size(screenRecorder.FrameSize.Width, (int)numericUpDown_screenheight.Value);
+        }
+
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
         }
     }
 }

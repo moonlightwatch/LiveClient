@@ -1,7 +1,9 @@
 ﻿using Accord.Audio;
+using Accord.Audio.Formats;
 using Accord.DirectSound;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -115,7 +117,6 @@ namespace Recorder
             throw new Exception("已停止录制。VideoSourceError: \n" + e.Description);
         }
 
-
         /// <summary>
         /// 获取音频输入设备
         /// </summary>
@@ -125,5 +126,6 @@ namespace Recorder
             AudioDeviceCollection audioDeviceInfos = new AudioDeviceCollection(AudioDeviceCategory.Capture);
             return audioDeviceInfos.ToList();
         }
+
     }
 }
