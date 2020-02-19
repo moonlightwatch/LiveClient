@@ -126,5 +126,25 @@ namespace 直播客户端
         private void button2_Click(object sender, EventArgs e)
         {
         }
+
+
+        private Recorder.RecordVideo recordVideo = new Recorder.RecordVideo();
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            recordVideo.Start();
+            timer1.Enabled = true;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            timer1.Enabled = false;
+            recordVideo.Stop();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            recordVideo.Output();
+        }
     }
 }

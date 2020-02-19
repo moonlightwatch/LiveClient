@@ -30,7 +30,7 @@ namespace Recorder
         /// </summary>
         public AudioRecorder()
         {
-
+            
         }
 
         /// <summary>
